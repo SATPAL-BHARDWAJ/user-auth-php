@@ -7,7 +7,7 @@
 		$password = $_POST['password'];
 		
 		if ( '' === trim($email) || '' === trim($password) ) {
-			$_SESSION['error'] = 'Credentials missing!';
+			session('error', 'Credentials missing!');
 			redirect('\login');
 		}
 		
@@ -20,7 +20,8 @@
 			if($row['numrows'] > 0){
 				
 				if(password_verify($password, $row['password'])){
-					$_SESSION['user'] = $row['id'];
+					session('user', $row['id']);
+
 					$now = date('Y-m-d H:i:s');
 
 					$stmt = $conn->prepare("UPDATE users SET updated_at=:updated_at WHERE id=:id");
@@ -29,13 +30,13 @@
 					redirect('\\');
 				}
 				else{
-					$_SESSION['error'] = 'Incorrect Password';
+					session('error', 'Incorrect Password');
 				}
 				
 				
 			}
 			else{
-				$_SESSION['error'] = 'Email not found';
+				session('error', 'Email not found');
 			}
 		}
 		catch(PDOException $e){
@@ -44,7 +45,7 @@
 
 	}
 	else{
-		$_SESSION['error'] = 'Input login credentails first';
+		session('error', 'Input login credentails first');
 	}
 
 	$pdo->close();

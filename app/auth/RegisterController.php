@@ -20,7 +20,7 @@ if(isset($_POST['email'])){
         $stmt->execute(['email'=>$email]);
         $row = $stmt->fetch();
         if($row['numrows'] > 0){
-            $_SESSION['error'] = 'Email already taken';
+            session('error', 'Email already taken');
             redirect('\signup');
         }
         else{
@@ -36,7 +36,7 @@ if(isset($_POST['email'])){
                 redirect('\\');
             }
             catch(PDOException $e){
-                $_SESSION['error'] = $e->getMessage();
+                session('error', $e->getMessage());
                 redirect('\signup');
             }
 
@@ -48,7 +48,7 @@ if(isset($_POST['email'])){
 
 }
 else{
-    $_SESSION['error'] = 'Fill up signup form first';
+    session('error', 'Fill up signup form first');
     redirect('\signup');
 }
 
