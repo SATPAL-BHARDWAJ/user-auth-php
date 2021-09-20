@@ -7,6 +7,8 @@ Login and registration form with php &amp; mysql
 ![](signup.png)
 ![](dashboard.png)
 
+## Demo
+[demo.sbsharma.com/user-auth-php](https://demo.sbsharma.com/user-auth-php)
 
 ## Contributors
 
